@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Allow: /image-to-pdf
+Allow: /pdf-to-image
+Allow: /compress
+Allow: /convert
+Allow: /background-remover
+Allow: /merge-pdf
+Allow: /sign-pdf
+Disallow: /models/
+
+# Sitemap
+Sitemap: https://img365.in/sitemap.xml
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
