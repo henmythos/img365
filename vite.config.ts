@@ -27,17 +27,14 @@ export default defineConfig({
     // Copy public directory as-is
     copyPublicDir: true,
     // Use esnext for better WASM support (still good for other things)
-    target: 'esnext',
+    target: 'es2020',
     rollupOptions: {
       output: {
         manualChunks: (id) => {
           // Vendor chunks
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
               return 'vendor-react';
-            }
-            if (id.includes('react-router')) {
-              return 'vendor-router';
             }
             if (id.includes('browser-image-compression')) {
               return 'lib-compression';

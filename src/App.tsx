@@ -6,6 +6,8 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { SEO } from './components/SEO';
 import { useScrollToUpload } from './hooks/useScrollToUpload';
 
+import { ErrorBoundary } from './components/ErrorBoundary';
+
 // Component to handle scroll-to-upload on route changes (must be inside Router)
 function ScrollToUploadHandler() {
   useScrollToUpload();
@@ -63,40 +65,42 @@ function App() {
           <SEO />
           <Header />
           <main className="pt-16">
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/convert" element={<Convert />} />
-                <Route path="/compress" element={<Compress />} />
-                <Route path="/image-to-pdf" element={<ImageToPDF />} />
-                <Route path="/pdf-to-image" element={<PDFToImage />} />
-                <Route path="/camera-to-pdf" element={<CameraToPDF />} />
-                {/* New PDF Tools */}
-                <Route path="/excel-to-pdf" element={<ExcelToPDF />} />
-                <Route path="/merge-pdf" element={<MergePDF />} />
-                <Route path="/split-pdf" element={<SplitPDF />} />
-                <Route path="/watermark" element={<Watermark />} />
-                <Route path="/pdf-to-text" element={<PDFToText />} />
-                <Route path="/crop-pdf" element={<CropPDF />} />
-                <Route path="/sign-pdf" element={<SignPDF />} />
-                {/* New Image Tools */}
-                <Route path="/image-resize" element={<ImageResize />} />
-                <Route path="/image-crop" element={<ImageCrop />} />
-                <Route path="/image-rotate" element={<ImageRotate />} />
-                <Route path="/smart-scan" element={<SmartScan />} />
-                {/* Info Pages */}
-                <Route path="/faq" element={<FAQ />} />
-                <Route path="/developer" element={<Developer />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/why-us" element={<WhyUs />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/blog" element={<BlogList />} />
-                <Route path="/blog/:slug" element={<BlogPost />} />
-                <Route path="*" element={<Home />} />
-              </Routes>
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/convert" element={<Convert />} />
+                  <Route path="/compress" element={<Compress />} />
+                  <Route path="/image-to-pdf" element={<ImageToPDF />} />
+                  <Route path="/pdf-to-image" element={<PDFToImage />} />
+                  <Route path="/camera-to-pdf" element={<CameraToPDF />} />
+                  {/* New PDF Tools */}
+                  <Route path="/excel-to-pdf" element={<ExcelToPDF />} />
+                  <Route path="/merge-pdf" element={<MergePDF />} />
+                  <Route path="/split-pdf" element={<SplitPDF />} />
+                  <Route path="/watermark" element={<Watermark />} />
+                  <Route path="/pdf-to-text" element={<PDFToText />} />
+                  <Route path="/crop-pdf" element={<CropPDF />} />
+                  <Route path="/sign-pdf" element={<SignPDF />} />
+                  {/* New Image Tools */}
+                  <Route path="/image-resize" element={<ImageResize />} />
+                  <Route path="/image-crop" element={<ImageCrop />} />
+                  <Route path="/image-rotate" element={<ImageRotate />} />
+                  <Route path="/smart-scan" element={<SmartScan />} />
+                  {/* Info Pages */}
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/developer" element={<Developer />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/why-us" element={<WhyUs />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/blog" element={<BlogList />} />
+                  <Route path="/blog/:slug" element={<BlogPost />} />
+                  <Route path="*" element={<Home />} />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
           </main>
           <Footer />
         </div>
