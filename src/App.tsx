@@ -14,8 +14,9 @@ function ScrollToUploadHandler() {
   return null;
 }
 
-// Lazy load pages for better performance
-const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
+import { Home } from './pages/Home';
+
+// Lazy load remaining pages for better performance
 const Convert = lazy(() => import('./pages/Convert').then(module => ({ default: module.Convert })));
 const Compress = lazy(() => import('./pages/Compress').then(module => ({ default: module.Compress })));
 const ImageToPDF = lazy(() => import('./pages/ImageToPDF').then(module => ({ default: module.ImageToPDF })));

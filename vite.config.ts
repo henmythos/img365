@@ -52,11 +52,6 @@ export default defineConfig({
             // Other node_modules
             return 'vendor';
           }
-          // Page chunks for code splitting
-          if (id.includes('/pages/')) {
-            const pageName = id.split('/pages/')[1].split('.')[0];
-            return `page-${pageName}`;
-          }
         },
       },
     },
