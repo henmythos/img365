@@ -34,6 +34,15 @@ export const SplitPDF: React.FC = () => {
   const [resultPdfUrl, setResultPdfUrl] = useState<string | null>(null);
   const [resultZipUrl, setResultZipUrl] = useState<string | null>(null);
 
+  React.useEffect(() => {
+    if (resultPdfUrl || resultZipUrl) {
+      const el = document.getElementById('results-section');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [resultPdfUrl, resultZipUrl]);
+
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(true);
@@ -373,7 +382,7 @@ export const SplitPDF: React.FC = () => {
 
                 {/* Download Result Cards */}
                 {resultPdfUrl && (
-                  <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-500 rounded-2xl flex items-center justify-between">
+                  <div id="results-section" className="p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-500 rounded-2xl flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-emerald-500" />
                       <span className="text-sm font-bold text-gray-900 dark:text-white">Merged PDF Page Extraction Ready</span>

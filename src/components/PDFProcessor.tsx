@@ -197,6 +197,15 @@ export const PDFProcessor: React.FC<PDFProcessorProps> = ({ mode, title, descrip
     setError(null);
   };
 
+  useEffect(() => {
+    if (processedFiles.length > 0) {
+      const el = document.getElementById('results-section');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [processedFiles]);
+
   const removeFile = (index: number) => {
     setFiles(prev => prev.filter((_, i) => i !== index));
   };
@@ -454,7 +463,7 @@ export const PDFProcessor: React.FC<PDFProcessorProps> = ({ mode, title, descrip
 
       {/* Results */}
       {processedFiles.length > 0 && (
-        <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div id="results-section" className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {mode === 'imageToPdf' ? 'Generated PDF' : `Extracted Images (${processedFiles.length})`}

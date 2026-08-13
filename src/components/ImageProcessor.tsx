@@ -155,6 +155,15 @@ export const ImageProcessor: React.FC<ImageProcessorProps> = ({ mode, title, des
     return Math.round((1 - processed / original) * 100);
   };
 
+  useEffect(() => {
+    if (processedImages.length > 0) {
+      const el = document.getElementById('results-section');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [processedImages]);
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="text-center mb-8">
@@ -311,7 +320,7 @@ export const ImageProcessor: React.FC<ImageProcessorProps> = ({ mode, title, des
 
       {/* Results */}
       {processedImages.length > 0 && (
-        <div className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div id="results-section" className="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Processed Images ({processedImages.length})

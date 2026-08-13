@@ -27,6 +27,15 @@ export const CameraProcessor: React.FC = () => {
   const detectionFrameRef = useRef<number | null>(null);
   const detectionTimeoutRef = useRef<number | null>(null);
 
+  useEffect(() => {
+    if (processedPDF) {
+      const el = document.getElementById('results-section');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [processedPDF]);
+
   const startCamera = async () => {
     try {
       let stream: MediaStream | null = null;
@@ -517,7 +526,7 @@ export const CameraProcessor: React.FC = () => {
       )}
 
       {processedPDF && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div id="results-section" className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             PDF Ready!
           </h3>

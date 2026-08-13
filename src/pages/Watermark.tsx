@@ -44,6 +44,15 @@ export const Watermark: React.FC = () => {
     setResultUrl(null);
     const name = f.name.toLowerCase();
 
+  React.useEffect(() => {
+    if (resultUrl) {
+      const el = document.getElementById('results-section');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [resultUrl]);
+
     if (name.endsWith('.pdf') || f.type === 'application/pdf') {
       setFileType('pdf');
       setFile(f);
@@ -335,7 +344,7 @@ export const Watermark: React.FC = () => {
 
                 {/* Result Card */}
                 {resultUrl && (
-                  <div className="p-5 bg-purple-50 dark:bg-purple-900/20 border border-purple-500 rounded-2xl flex items-center justify-between">
+                  <div id="results-section" className="p-5 bg-purple-50 dark:bg-purple-900/20 border border-purple-500 rounded-2xl flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-purple-600" />
                       <span className="text-sm font-bold text-gray-900 dark:text-white">Watermarked File Ready!</span>

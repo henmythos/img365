@@ -46,6 +46,15 @@ export const MergePDF: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [draggedItemIndex, setDraggedItemIndex] = useState<number | null>(null);
 
+    React.useEffect(() => {
+        if (result) {
+            const el = document.getElementById('results-section');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    }, [result]);
+
     const handleDragOver = useCallback((e: React.DragEvent) => {
         e.preventDefault();
         setIsDragging(true);
@@ -493,7 +502,7 @@ export const MergePDF: React.FC = () => {
 
                         {/* Result Download Card */}
                         {result && (
-                            <div className="p-6 bg-emerald-500/10 border-2 border-emerald-500 rounded-2xl text-center space-y-4 animate-fadeIn">
+                            <div id="results-section" className="p-6 bg-emerald-500/10 border-2 border-emerald-500 rounded-2xl text-center space-y-4 animate-fadeIn">
                                 <div className="p-3 bg-emerald-500 text-white rounded-full w-12 h-12 mx-auto flex items-center justify-center shadow-md">
                                     <CheckCircle className="w-6 h-6" />
                                 </div>

@@ -64,6 +64,15 @@ export const ExcelToPDF: React.FC = () => {
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
   const [activePreviewTab, setActivePreviewTab] = useState<string | null>(null);
 
+  React.useEffect(() => {
+    if (pdfBlobUrl) {
+      const el = document.getElementById('results-section');
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [pdfBlobUrl]);
+
   // Handle Drag Over
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -667,7 +676,7 @@ export const ExcelToPDF: React.FC = () => {
 
                     {/* Download Card if PDF generated */}
                     {pdfBlobUrl && (
-                      <div className="p-5 bg-emerald-500/10 border-2 border-emerald-500 rounded-2xl text-center space-y-3 animate-fadeIn">
+                      <div id="results-section" className="p-5 bg-emerald-500/10 border-2 border-emerald-500 rounded-2xl text-center space-y-3 animate-fadeIn">
                         <div className="p-3 bg-emerald-500 text-white rounded-full w-12 h-12 mx-auto flex items-center justify-center shadow-md">
                           <Check className="w-6 h-6" />
                         </div>

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-// Tool routes that should auto-scroll to upload section
 const TOOL_ROUTES = [
     '/convert',
     '/compress',
@@ -21,28 +20,23 @@ const TOOL_ROUTES = [
     '/smart-scan',
 ];
 
-/**
- * Custom hook that automatically scrolls to the upload section
- * when navigating between tool pages in the SPA.
- * 
- * Uses the border-dashed class which is present on all upload areas
- * across ImageProcessor, PDFProcessor, and CameraProcessor components.
- */
 export function useScrollToUpload() {
     const location = useLocation();
 
     useEffect(() => {
-        const isToolRoute = TOOL_ROUTES.some(route => location.pathname === route);
+        // ALWAYS scroll to top of page on any route change (footer links, navbar, internal links)
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
+        const isToolRoute = TOOL_ROUTES.some(route => location.pathname === route);
         if (!isToolRoute) return;
 
-        // Small delay to allow lazy-loaded components to render
+        // Smooth scroll to upload zone for tool pages
         const timeoutId = setTimeout(() => {
             const uploadElement = document.querySelector('[class*="border-dashed"]');
             if (uploadElement) {
                 uploadElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
-        }, 150);
+        }, 120);
 
         return () => clearTimeout(timeoutId);
     }, [location.pathname]);
