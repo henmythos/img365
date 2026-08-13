@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import JSZip from 'jszip';
 import { Upload, Download, Settings, Eye, Trash2, FileImage, FileArchive } from 'lucide-react';
 
